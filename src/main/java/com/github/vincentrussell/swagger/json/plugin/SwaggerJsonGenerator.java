@@ -48,6 +48,7 @@ public class SwaggerJsonGenerator implements Closeable {
     private String apiInfoLicense = "Apache 2.0";
     private String apiInfoLicenseUrl = "http://www.apache.org/licenses/LICENSE-2.0";
     private Set<Scheme> schemes = new HashSet<>();
+    private Set<String> pathIncludeRegexes = new HashSet<>();
 
     public SwaggerJsonGenerator(String... contextLocations) {
         this(getContextFromString(contextLocations));
@@ -77,6 +78,11 @@ public class SwaggerJsonGenerator implements Closeable {
                 throw new IllegalArgumentException("can not understand type: " + object.getClass());
             }
         }));
+        return this;
+    }
+
+    public SwaggerJsonGenerator setPathIncludeRegexes(Collection<String> pathIncludeRegexes) {
+        this.pathIncludeRegexes = Sets.newHashSet(pathIncludeRegexes);
         return this;
     }
 
@@ -193,6 +199,8 @@ public class SwaggerJsonGenerator implements Closeable {
                 return swaggerJsonGenerator.basePath;
             } else if (DocketExtended.PROTOCOLS.equals(name)) {
                 return Joiner.on(DocketExtended.SEPARATOR_COMMA).join(swaggerJsonGenerator.schemes);
+            } else if (DocketExtended.PATH_INCLUDE_REGEXES.equals(name)) {
+                return Joiner.on(DocketExtended.SEPARATOR_COMMA).join(swaggerJsonGenerator.pathIncludeRegexes);
             } else if (DocketExtended.API_INFO_TITLE.equals(name)) {
                 return swaggerJsonGenerator.apiInfoTitle;
             } else if (DocketExtended.API_INFO_DESCRIPTION.equals(name)) {
