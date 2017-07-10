@@ -74,13 +74,24 @@ public class SwaggerJsonGeneratorTest {
     }
 
     @Test
-    public void loadContextFromXmlConfigWithPathRegex() throws IOException {
+    public void loadContextFromXmlConfigWithPathRegexInclude() throws IOException {
         try (SwaggerJsonGenerator swaggerJsonGenerator = new SwaggerJsonGenerator("classpath:spring-web-servlet.xml")
         .setPathIncludeRegexes(Collections.singleton("/hello.+"))) {
             String json = swaggerJsonGenerator.getSwaggerJson();
             Map<String, Object> jsonObject = parseJson(json);
             assertThat(((Map)jsonObject.get("paths")).keySet(), (Matcher)hasItems("/hello/", "/hello/hello/{name}"));
             assertThat(((Map)jsonObject.get("paths")).keySet(), (Matcher)not(hasItems("/goodbye/", "/goodbye/goodbye/{name}")));
+        }
+    }
+
+    @Test
+    public void loadContextFromXmlConfigWithPathRegexExclude() throws IOException {
+        try (SwaggerJsonGenerator swaggerJsonGenerator = new SwaggerJsonGenerator("classpath:spring-web-servlet.xml")
+                .setPathExcludeRegexes(Collections.singleton("/hello.+"))) {
+            String json = swaggerJsonGenerator.getSwaggerJson();
+            Map<String, Object> jsonObject = parseJson(json);
+            assertThat(((Map)jsonObject.get("paths")).keySet(), (Matcher)hasItems("/goodbye/", "/goodbye/goodbye/{name}"));
+            assertThat(((Map)jsonObject.get("paths")).keySet(), (Matcher)not(hasItems("/hello/", "/hello/hello/{name}")));
         }
     }
 

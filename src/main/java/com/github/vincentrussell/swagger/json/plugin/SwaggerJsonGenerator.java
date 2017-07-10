@@ -49,6 +49,7 @@ public class SwaggerJsonGenerator implements Closeable {
     private String apiInfoLicenseUrl = "http://www.apache.org/licenses/LICENSE-2.0";
     private Set<Scheme> schemes = new HashSet<>();
     private Set<String> pathIncludeRegexes = new HashSet<>();
+    private Set<String> pathExcludeRegexes = new HashSet<>();
 
     public SwaggerJsonGenerator(String... contextLocations) {
         this(getContextFromString(contextLocations));
@@ -83,6 +84,11 @@ public class SwaggerJsonGenerator implements Closeable {
 
     public SwaggerJsonGenerator setPathIncludeRegexes(Collection<String> pathIncludeRegexes) {
         this.pathIncludeRegexes = Sets.newHashSet(pathIncludeRegexes);
+        return this;
+    }
+
+    public SwaggerJsonGenerator setPathExcludeRegexes(Collection<String> pathExcludeRegexes) {
+        this.pathExcludeRegexes = Sets.newHashSet(pathExcludeRegexes);
         return this;
     }
 
@@ -201,6 +207,8 @@ public class SwaggerJsonGenerator implements Closeable {
                 return Joiner.on(DocketExtended.SEPARATOR_COMMA).join(swaggerJsonGenerator.schemes);
             } else if (DocketExtended.PATH_INCLUDE_REGEXES.equals(name)) {
                 return Joiner.on(DocketExtended.SEPARATOR_COMMA).join(swaggerJsonGenerator.pathIncludeRegexes);
+            } else if (DocketExtended.PATH_EXCLUDE_REGEXES.equals(name)) {
+                return Joiner.on(DocketExtended.SEPARATOR_COMMA).join(swaggerJsonGenerator.pathExcludeRegexes);
             } else if (DocketExtended.API_INFO_TITLE.equals(name)) {
                 return swaggerJsonGenerator.apiInfoTitle;
             } else if (DocketExtended.API_INFO_DESCRIPTION.equals(name)) {

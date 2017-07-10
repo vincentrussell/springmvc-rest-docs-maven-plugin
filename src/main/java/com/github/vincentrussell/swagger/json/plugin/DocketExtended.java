@@ -32,7 +32,8 @@ public class DocketExtended extends Docket {
     public static final String API_INFO_LICENSE = "apiInfo.license";
     public static final String API_INFO_LICENSE_URL = "apiInfo.licenseUrl";
     public static final String BASE_PATH = "basePath";
-    public static final String PATH_INCLUDE_REGEXES = "pathIncludesRegexes";
+    public static final String PATH_INCLUDE_REGEXES = "pathIncludeRegexes";
+    public static final String PATH_EXCLUDE_REGEXES = "pathExcludeRegexes";
 
     public DocketExtended(DocumentationType documentationType, ApplicationContext applicationContext) {
         super(documentationType);
@@ -44,10 +45,11 @@ public class DocketExtended extends Docket {
         }
 
         String pathIncludesRegexes = applicationContext.getEnvironment().getProperty(PATH_INCLUDE_REGEXES);
-        if (!isEmpty(pathIncludesRegexes)) {
+        String pathExcludeRegexes = applicationContext.getEnvironment().getProperty(PATH_EXCLUDE_REGEXES);
+        if (!isEmpty(pathIncludesRegexes) || !isEmpty(pathExcludeRegexes)) {
             select()
             .apis(RequestHandlerSelectors.any())
-            .paths(new RegexPredicate(pathIncludesRegexes))
+            .paths(new RegexPredicate(pathIncludesRegexes, pathExcludeRegexes))
             .build();
         }
 
@@ -67,21 +69,29 @@ public class DocketExtended extends Docket {
 
     private static class RegexPredicate implements Predicate<String> {
 
-        private final Set<Pattern> pathIncludesRegexes;
+        private final Set<Pattern> pathIncludeRegexes;
+        private final Set<Pattern> pathExcludeRegexes;
 
-        private RegexPredicate(String pathIncludesRegexes) {
-            this.pathIncludesRegexes = Sets.newHashSet(Iterables.transform(Splitter.on(SEPARATOR_COMMA)
-                    .split(pathIncludesRegexes), input -> Pattern.compile(input)));
+        private RegexPredicate(String pathIncludeRegexes, String pathExcludeRegexes) {
+            this.pathIncludeRegexes = !isEmpty(pathIncludeRegexes) ? Sets.newHashSet(Iterables.transform(Splitter.on(SEPARATOR_COMMA)
+                    .split(pathIncludeRegexes), input -> Pattern.compile(input))) : Collections.emptySet();
+            this.pathExcludeRegexes = !isEmpty(pathExcludeRegexes) ? Sets.newHashSet(Iterables.transform(Splitter.on(SEPARATOR_COMMA)
+                    .split(pathExcludeRegexes), input -> Pattern.compile(input))) : Collections.emptySet();
         }
 
         @Override
         public boolean apply(String input) {
-            for (Pattern pattern : pathIncludesRegexes) {
+            for (Pattern pattern : pathIncludeRegexes) {
                 if (pattern.matcher(input).matches()) {
                     return true;
                 }
             }
-            return false;
+            for (Pattern pattern : pathExcludeRegexes) {
+                if (pattern.matcher(input).matches()) {
+                    return false;
+                }
+            }
+            return pathIncludeRegexes.size() == 0 ? true : false;
         }
     }
 }

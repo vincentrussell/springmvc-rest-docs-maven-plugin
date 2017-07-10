@@ -102,27 +102,14 @@ public class SwaggerJsonToMarkupConverter implements Closeable {
         return this;
     }
 
-    public SwaggerJsonToMarkupConverter setPathIncludeRegexes(Collection<String> pathRegexes) {
-        swaggerJsonGenerator.setPathIncludeRegexes(pathRegexes);
+    public SwaggerJsonToMarkupConverter setPathIncludeRegexes(Collection<String> pathIncludeRegexes) {
+        swaggerJsonGenerator.setPathIncludeRegexes(pathIncludeRegexes);
         return this;
     }
 
-    public void writeToDirectory(File directory) throws IOException {
-        notNull(directory);
-        final String json = swaggerJsonGenerator.getSwaggerJson();
-        Swagger2MarkupConverter.from(json)
-                .build()
-                .toFile(directory.toPath());
-
-        Asciidoctor asciidoctor = create();
-
-        String[] result = asciidoctor.convertDirectory(
-                new AsciiDocDirectoryWalker(directory.getAbsolutePath()),
-                new HashMap<String, Object>());
-
-        for (String html : result) {
-            System.out.println(html);
-        }
+    public SwaggerJsonToMarkupConverter setPathExcludeRegexes(Collection<String> pathExcludeRegexes) {
+        swaggerJsonGenerator.setPathExcludeRegexes(pathExcludeRegexes);
+        return this;
     }
 
     @Override

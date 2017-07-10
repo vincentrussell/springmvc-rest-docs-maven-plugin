@@ -32,20 +32,17 @@ public class SwaggerJsonToMarkupConverterTest {
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-    private File folder;
     private File file;
 
 
     @Before
     public void before() throws IOException {
-        folder = temporaryFolder.newFolder();
         file = temporaryFolder.newFile("output.html");
     }
 
 
     @Test
     public void loadContextFromXmlConfig() throws IOException {
-        FileUtils.deleteDirectory(folder);
         try (SwaggerJsonToMarkupConverter swaggerJsonGenerator = callSetters(new SwaggerJsonToMarkupConverter("classpath:spring-web-servlet.xml"))) {
             swaggerJsonGenerator.writeToHtmlFile(file);
         }
@@ -54,7 +51,7 @@ public class SwaggerJsonToMarkupConverterTest {
     @Test
     public void loadContextFromAnnotation() throws IOException {
         try (SwaggerJsonToMarkupConverter swaggerJsonGenerator = callSetters(new SwaggerJsonToMarkupConverter(SpringWebConfig.class))) {
-            swaggerJsonGenerator.writeToDirectory(folder);
+            swaggerJsonGenerator.writeToHtmlFile(file);
         }
     }
 
