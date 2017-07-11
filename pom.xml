@@ -4,7 +4,7 @@
   <groupId>com.github.vincentrussell</groupId>
   <artifactId>springmvc-rest-docs-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-RC1</version>
+  <version>1.0-SNAPSHOT</version>
 
   <name>springmvc-rest-docs-parent</name>
   <description>sql-to-mongo-db-query-converter helps you build quieres for
@@ -56,7 +56,7 @@
       <dependency>
         <groupId>com.github.vincentrussell</groupId>
         <artifactId>springmvc-rest-docs-deps</artifactId>
-        <version>1.0-RC1</version>
+        <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
