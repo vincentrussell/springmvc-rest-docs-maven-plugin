@@ -117,23 +117,23 @@ public class SwaggerJsonToMarkupConverter implements Closeable {
         swaggerJsonGenerator.close();
     }
 
-    public void writeToHtmlFile(File outputFile) throws IOException {
+    public void writeToHtmlFile(final File outputFile) throws IOException {
         notNull(outputFile);
-        File parentDirectory = outputFile.getParentFile();
+        final File parentDirectory = outputFile.getParentFile();
+        parentDirectory.mkdirs();
         File tempFile = File.createTempFile(FilenameUtils.getBaseName(outputFile.getAbsolutePath()),"", parentDirectory);
         final String json = swaggerJsonGenerator.getSwaggerJson();
         Swagger2MarkupConverter.from(json)
                 .build()
                 .toFile(tempFile.toPath());
 
-        Asciidoctor asciidoctor = create();
-        File tempAsciidocFile = new File(tempFile + ".adoc");
-        File tempHtmlfile = new File(tempFile + ".html");
-        String html = asciidoctor.convertFile(tempAsciidocFile, new HashMap<String, Object>());
+        final Asciidoctor asciidoctor = create();
+        final File tempAsciidocFile = new File(tempFile + ".adoc");
+        final File tempHtmlfile = new File(tempFile + ".html");
+        final String html = asciidoctor.convertFile(tempAsciidocFile, new HashMap<String, Object>());
         FileUtils.copyFile(tempHtmlfile, outputFile);
         FileUtils.forceDelete(tempAsciidocFile);
         FileUtils.forceDelete(tempHtmlfile);
         FileUtils.forceDelete(tempFile);
-        System.out.println("");
     }
 }
