@@ -238,6 +238,16 @@
     </pluginManagement>
 
   </build>
+
+
+  <scm>
+    <connection>scm:git:git@github.com:vincentrussell/springmvc-rest-docs-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:vincentrussell/springmvc-rest-docs-maven-plugin.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/vincentrussell/springmvc-rest-docs-maven-plugin</url>
+  </scm>
+
+
   <profiles>
     <profile>
       <id>testSkip</id>
