@@ -1,7 +1,7 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.vincentrussell.swagger.json.plugin.applicationConfig.SpringWebConfig;
+import com.github.vincentrussell.restdocs.maven.plugin.applicationConfig.SpringWebConfig;
 import com.google.common.collect.ImmutableMap;
 import io.swagger.models.Scheme;
 import org.hamcrest.Matcher;

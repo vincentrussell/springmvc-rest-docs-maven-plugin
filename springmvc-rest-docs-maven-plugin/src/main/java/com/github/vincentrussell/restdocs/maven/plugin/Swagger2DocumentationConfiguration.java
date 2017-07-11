@@ -1,4 +1,4 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +15,6 @@ import springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMa
 import springfox.documentation.spring.web.SpringfoxWebMvcConfiguration;
 import springfox.documentation.spring.web.json.JacksonModuleRegistrar;
 import springfox.documentation.spring.web.json.JsonSerializer;
-import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.configuration.SwaggerCommonConfiguration;
 import springfox.documentation.swagger2.configuration.Swagger2JacksonModule;
 import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;

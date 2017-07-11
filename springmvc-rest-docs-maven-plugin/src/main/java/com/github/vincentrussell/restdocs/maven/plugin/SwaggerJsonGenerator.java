@@ -1,4 +1,4 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;

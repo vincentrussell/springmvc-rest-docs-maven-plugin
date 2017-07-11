@@ -1,8 +1,7 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import io.swagger.models.Scheme;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -18,9 +17,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.isTrue;
 

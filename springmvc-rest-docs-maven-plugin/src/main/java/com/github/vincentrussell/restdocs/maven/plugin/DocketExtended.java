@@ -1,4 +1,4 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;

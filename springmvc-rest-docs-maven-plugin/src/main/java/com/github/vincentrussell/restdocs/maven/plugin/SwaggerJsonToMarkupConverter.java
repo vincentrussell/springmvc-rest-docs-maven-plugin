@@ -1,10 +1,9 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
 import io.github.swagger2markup.Swagger2MarkupConverter;
 import io.swagger.models.Scheme;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.asciidoctor.AsciiDocDirectoryWalker;
 import org.asciidoctor.Asciidoctor;
 
 import java.io.Closeable;

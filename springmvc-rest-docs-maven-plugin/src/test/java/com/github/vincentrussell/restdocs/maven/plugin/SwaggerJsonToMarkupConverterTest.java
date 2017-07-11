@@ -1,8 +1,7 @@
-package com.github.vincentrussell.swagger.json.plugin;
+package com.github.vincentrussell.restdocs.maven.plugin;
 
-import com.github.vincentrussell.swagger.json.plugin.applicationConfig.SpringWebConfig;
+import com.github.vincentrussell.restdocs.maven.plugin.applicationConfig.SpringWebConfig;
 import io.swagger.models.Scheme;
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

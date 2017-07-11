@@ -1,4 +1,4 @@
-package com.github.vincentrussell.swagger.json.plugin.controller;
+package com.github.vincentrussell.restdocs.maven.plugin.controller;
 
 import com.google.common.collect.ImmutableMap;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package com.github.vincentrussell.swagger.json.plugin.applicationConfig;
+package com.github.vincentrussell.restdocs.maven.plugin.applicationConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc //mvc:annotation-driven
 @Configuration
-@ComponentScan({ "com.github.vincentrussell.swagger.json.plugin.controller" })
+@ComponentScan({ "com.github.vincentrussell.restdocs.maven.plugin.controller" })
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
